@@ -1,25 +1,33 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import PhoneForm from './components/PhoneForm';
 
 class App extends Component {
+  id = 0; // id값은 렌더링 되는 값이 아니기 때문에 굳이 setState에 넣어줄 필요없다.
+  state = {
+    information: [] 
+
+  }
+  handleCreate = (data) => {
+    //this.state.information.push(data); 처럼 사용하면 절대 안된다.
+    //push를 사용하지 않고 concat이라는 내장함수를 사용한다.
+    // this.setState({
+    //   information:this.state.information, 
+    // }) 이렇게도 해주면 안된다.
+    const { information } = this.state;
+    this.setState({
+      information:information.concat(Object.assign({}, data, {
+        //...data,
+        // name:data.name,
+        // phone:data.phone,
+        id: this.id++
+      }))
+    });
+  }
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <div>
+        <PhoneForm onCreate={this.handleCreate}/>
+        {JSON.stringify(this.state.information)}
       </div>
     );
   }
