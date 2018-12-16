@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PhoneForm from './components/PhoneForm';
+import PhoneInfoList from './components/PhoneInfoList';
 
 class App extends Component {
   id = 0; // id값은 렌더링 되는 값이 아니기 때문에 굳이 setState에 넣어줄 필요없다.
@@ -27,7 +28,7 @@ class App extends Component {
     return (
       <div>
         <PhoneForm onCreate={this.handleCreate}/>
-        {JSON.stringify(this.state.information)}
+        <PhoneInfoList data={this.state.information}/>
       </div>
     );
   }
