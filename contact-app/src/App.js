@@ -24,11 +24,23 @@ class App extends Component {
       }))
     });
   }
+
+  handleRemove = (id) => {
+    const { information } = this.state;
+    this.setState ({
+      //info 값이 info.id가 파라미터로 받은 id가 아닌 것들만 필터링 하기
+      information : information.filter(info => info.id !== id) 
+    })
+  }
   render() {
     return (
       <div>
         <PhoneForm onCreate={this.handleCreate}/>
-        <PhoneInfoList data={this.state.information}/>
+        {/*Ctrl 키를 누르고 아래 phoneInfoList 에 마우스 커서를 대면 파일을 바로 열 수 있다.*/}
+        <PhoneInfoList 
+          data={this.state.information}
+          onRemove={this.handleRemove}
+        />
       </div>
     );
   }
