@@ -7,7 +7,7 @@ class PhoneInfoList extends Component {
     }
 
     render() {
-        const { data, onRemove } =this.props;
+        const { data, onRemove, onUpdate } =this.props;
         console.log(this.props);
         //if(!data) return null;
         //data가 없으면 아래 내용을 진행하지않겠다는 의미
@@ -17,6 +17,7 @@ class PhoneInfoList extends Component {
             info => (
                 <PhoneInfo 
                     onRemove={onRemove} 
+                    onUpdate={onUpdate}
                     info={info} 
                     key={info.id} 
                 />)
