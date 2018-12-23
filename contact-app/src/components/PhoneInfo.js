@@ -7,6 +7,15 @@ class PhoneInfo extends Component {
         name: '',
         phone: ''
     }
+
+    //scu를 입력하면 shouldComponentUpdate가 실행됨
+    shouldComponentUpdate(nextProps, nextState) {
+        if(this.state !== nextState) {
+            return true;
+        }
+        return this.props.info !== nextProps.info;
+        //만약에 위의 코드들이 === 라면 render함수를 호출하지 않는다.
+    }
     handleRemove = () => {
         const {info, onRemove} = this.props;
         onRemove(info.id);
@@ -48,6 +57,9 @@ class PhoneInfo extends Component {
             padding: '8px',
             margin: '8px'
         };
+
+        console.log(name);
+
         return (
             <div style={style}>
                 {
