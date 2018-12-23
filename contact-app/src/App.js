@@ -21,8 +21,14 @@ class App extends Component {
         name: '강동원',
         phone: '010-0000-0003'
       },
-    ] //컴포넌트 최적화 작업을 할 때 사전에 초기값이 미리 있는게 편하다
+    ], //컴포넌트 최적화 작업을 할 때 사전에 초기값이 미리 있는게 편하다
+    keyword:'',
+  }
 
+  handleChange = (e) => {
+    this.setState({
+      keyword:e.target.value,
+    })
   }
   handleCreate = (data) => {
     //this.state.information.push(data); 처럼 사용하면 절대 안된다.
@@ -71,8 +77,15 @@ class App extends Component {
       <div>
         <PhoneForm onCreate={this.handleCreate}/>
         {/*Ctrl 키를 누르고 아래 phoneInfoList 에 마우스 커서를 대면 파일을 바로 열 수 있다.*/}
+        <input
+          value={this.state.keyword}
+          onChange={this.handleChange}
+          placeholder="검색..."
+        />
         <PhoneInfoList 
-          data={this.state.information}
+          data={this.state.information.filter(
+            info => info.name.indexOf(this.state.keyword) > -1
+          )}
           onRemove={this.handleRemove}
           onUpdate={this.handleUpdate}
         />
